@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-_VIM=$(which vim);
-# Make vim the default editor
-export EDITOR="${_VIM}";
+# _VIM=$(which vim);
+# # Make vim the default editor
+# export EDITOR="${_VIM}";
+
+# Set my editor and git editor
+export EDITOR="atom -nw"
+export GIT_EDITOR='atom -nw'
+
 
 # Larger bash history (allow 32³ entries; default is 500)
 export HISTSIZE=50000000;
@@ -18,7 +23,85 @@ export LC_ALL="en_US.UTF-8";
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="cless";
 
-# Always enable colored `grep` output
-export GREP_OPTIONS="--color=auto";
-
 #export DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/user/$(id -u)/bus;
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export GOPATH=/Users/malcolm/dev/go_workspace
+
+# export PATH="~/bin:/usr/local/share/python:/usr/local/bin:$PATH"
+export PATH="~/bin:/usr/local/bin:$PATH"
+
+# Setting PATH for Python 2.7.10
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+# add php5.4 to path
+# export PATH="/usr/local/php5/bin:$PATH"
+export PATH="$(brew --prefix php56)/bin:$PATH"
+
+# go workspace
+export PATH=$PATH:$GOPATH/bin
+#export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+# temporary packer 0.6.1 install
+# export PATH=$PATH:/usr/local/packer
+
+# virtualenv
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/dev
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
+export PYTHONSTARTUP=~/.pythonrc
+export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+
+complete -C '/usr/local/bin/aws_completer' aws
+export PATH=/usr/local/aws/bin:$PATH
+
+alias be='bundle exec'
+alias gcl='git clone'
+alias gpr='git pull --rebase'
+
+alias __git_find_subcommand='__git_find_on_cmdline'
+alias g='git'
+alias ga='git add'
+alias gall='git add .'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+alias gci='git commit --interactive'
+alias gcl='git clone'
+alias gcm='git commit -v -m'
+alias gco='git checkout'
+alias gcount='git shortlog -sn'
+alias gcp='git cherry-pick'
+alias gd='git diff | /usr/local/bin/mvim -f'
+alias gdel='git branch -D'
+alias gdv='git diff -w "$@" | vim -R -'
+alias get='git'
+alias gexport='git archive --format zip --output'
+alias gg='git log --graph --pretty=format:'\''%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset'\'' --abbrev-commit --date=relative'
+alias gl='git pull'
+alias gll='git log --graph --pretty=oneline --abbrev-commit'
+alias gm='git merge'
+alias gmu='git fetch origin -v; git fetch upstream -v; git merge upstream/master'
+alias gp='git push'
+alias gpo='git push origin'
+alias gpp='git pull && git push'
+alias gpr='git pull --rebase'
+alias gs='git status'
+alias gsl='git shortlog -sn'
+alias gss='git status -s'
+alias gst='git status'
+alias gup='git fetch && git rebase'
+alias gus='git reset HEAD'
+alias gw='git whatchanged'
+
+
+export _BUILD_ENV_DIR=~/dev/behanceops/anaconda/apps/behance/build-env
+export _BUILD_DIR=~/dev/behanceops/anaconda/apps/behance/build
