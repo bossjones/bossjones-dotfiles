@@ -3,6 +3,8 @@
 # clone if it doesn't exist yet
 if cd ~/dev/gpakosz/.tmux; then git pull; else git clone git@github.com:gpakosz/.tmux.git ~/dev/gpakosz/.tmux; fi
 
+mkdir -p ~/.tmux/
+
 # setup
 cp ~/dev/gpakosz/.tmux/.tmux.conf ~/.tmux/.tmux.conf
 
