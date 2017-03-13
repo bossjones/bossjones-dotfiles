@@ -1,0 +1,125 @@
+# ~/.tmuxinator/scarlett.yml
+
+name: scarlett_os
+root: ~/dev/bossjones/scarlett_os/
+
+# Optional. tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# start scarlett
+pre: cd ~/dev/bossjones/scarlett-ansible; vagrant up; sleep 35;
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: rbenv shell2.2.3
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+post: tmux -CC attach || tmux -CC
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+windows:
+  - vagrant:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - vagrant:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93mone pane"
+  - fswatch:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - fswatch:
+          - sleep 2
+          - echo -e "\e[93mtwo pane"
+          - cd ~/dev/bossjones/scarlett_os && ./fs-scarlett.sh
+  - mpris:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - mpris:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93mmpris"
+  - tasker:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - tasker:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93mtasker"
+  - listener:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - listener:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93mlistener"
+  - ipython:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - ipython:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93mipython"
+  - emitter:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - emitter:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93memitter"
+          - dbus-monitor
+  - dbus_monitor:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - dbus_monitor:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - dbus-monitor
+  - tests:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - tests:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - echo -e "\e[93mtests"
+  - journalctl:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - journalctl:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - echo -e "\e[93mjournalctl"
+          - journalctl -f
+  - dfeet:
+      layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
+      panes:
+        - dfeet:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 2
+          - vagrant ssh
+          - echo -e "\e[93md-feet"
+          - d-feet
