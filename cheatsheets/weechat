@@ -1,0 +1,34 @@
+# Set unread marker on all windows
+Ctrl-s Ctrl-u
+
+# Switch buffer left
+Ctrl-p, Alt-left
+# Switch buffer right
+Ctrl-n, Alt-right
+# Next buffer with activity
+Alt-a
+# Switch buffers
+Alt-0...9
+
+# Scroll buffer title
+F9/F10
+# Scroll nick list
+F11/F12
+
+# virtically split your screen into a small window
+/window splitv 33
+
+# remove split
+/window merge
+
+# commands to manage buffers and windows
+/buffer
+/window
+
+# Alt + ← / Alt + → or F5 / F6: switch to previous/next buffer
+# F7 / F8: switch to previous/next window (when screen is split)
+# F9 / F10: scroll title bar
+# F11 / F12: scroll nicklist
+# Tab: complete text in input bar, like in your shell
+# PgUp / PgDn: scroll text in current buffer
+# Alt+a: jump to buffer with activity (in hotlist)

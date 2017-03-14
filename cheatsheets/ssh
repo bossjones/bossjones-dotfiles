@@ -1,0 +1,59 @@
+# To ssh via pem file (which normally needs 0600 permissions):
+ssh -i /path/to/file.pem user@example.com
+
+# To connect on an non-standard port:
+ssh -p 2222 user@example.com
+
+# To connect and forward the authentication agent
+ssh -A user@example.com
+
+# To execute a command on a remote server:
+ssh -t user@example.com 'the-remote-command'
+
+# To tunnel an x session over SSH:
+ssh -X user@example.com
+
+# Redirect traffic with a tunnel between local host (port 8080) and a remote
+# host (remote.example.com:5000) through a proxy (personal.server.com):
+ssh -f -L 8080:remote.example.com:5000 user@personal.server.com -N
+
+# To launch a specific x application over SSH:
+ssh -X -t user@example.com 'chromium-browser'
+
+# To create a SOCKS proxy on localhost and port 9999
+ssh -D 9999 user@example.com
+
+# -X use an xsession, -C compress data, "-c blowfish" use the encryption blowfish
+ssh user@example.com -C -c blowfish -X
+
+# For more information, see:
+# http://unix.stackexchange.com/q/12755/44856
+
+# Copy files and folders through ssh from remote host to pwd with tar.gz compression
+# when there is no rsync command available
+ssh user@example.com "cd /var/www/Shared/; tar zcf - asset1 asset2" | tar zxf -
+
+# Mount folder/filesystem through SSH
+# Install SSHFS from https://github.com/libfuse/sshfs
+# Will allow you to mount a folder securely over a network.
+sshfs name@server:/path/to/folder /path/to/mount/point
+
+# Emacs can read file through SSH
+# Doc: http://www.gnu.org/software/emacs/manual/html_node/emacs/Remote-Files.html
+emacs /ssh:name@server:/path/to/file
+
+# source: http://blog.trackets.com/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html
+# Imagine you’re on a private network which doesn’t allow connections to a specific server. Let’s say you’re at work and imgur.com is being blocked. To get around this we can create a tunnel through a server which isn’t on our network and thus can access Imgur.
+ssh -L 9000:imgur.com:80 user@example.com
+
+# Remote port forwarding
+# Say that you’re developing a Rails application on your local machine, and you’d like to show it to a friend. Unfortunately your ISP didn’t provide you with a public IP address, so it’s not possible to connect to your machine directly via the internet.
+# We’ll tell SSH to make a tunnel that opens up a new port on the server, and connects it to a local port on your machine.
+ssh -R 9000:localhost:3000 user@example.com
+
+# There is one more thing you need to do to enable this. SSH doesn’t by default allow remote hosts to forwarded ports. To enable this open /etc/ssh/sshd_config and add the following line somewhere in that config file.
+# GatewayPorts yes
+# Make sure you add it only once!
+# $ sudo vim /etc/ssh/sshd_config
+# And restart SSH
+# $ sudo service ssh restart
