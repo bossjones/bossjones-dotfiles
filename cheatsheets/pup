@@ -1,0 +1,63 @@
+# Quick start
+
+# Ew, HTML. Let's run that through some pup selectors:
+curl -s https://news.ycombinator.com/
+
+# Okay, how about only the links?
+curl -s https://news.ycombinator.com/ | pup 'table table tr:nth-last-of-type(n+2) td.title a'
+
+# Even better, let's grab the titles too:
+curl -s https://news.ycombinator.com/ | pup 'table table tr:nth-last-of-type(n+2) td.title a attr{href}'
+
+# Basic Usage
+curl -s https://news.ycombinator.com/ | pup 'table table tr:nth-last-of-type(n+2) td.title a json{}'
+
+# Basic example
+cat index.html | pup [flags] '[selectors] [display function]'
+
+# Download a webpage with wget.
+wget http://en.wikipedia.org/wiki/Robots_exclusion_standard -O robots.html
+
+# Clean and indent
+# By default pup will fill in missing tags and properly indent the page.
+# nasty looking HTML
+cat robots.html
+
+# cleaned, indented, and colorful HTML
+cat robots.html | pup --color
+
+# Filter by tag
+cat robots.html | pup 'title'
+# <title>
+#  Robots exclusion standard - Wikipedia, the free encyclopedia
+# </title>
+
+# Filter by id
+cat robots.html | pup 'span#See_also'
+# <span class="mw-headline" id="See_also">
+#  See also
+# </span>
+
+# Filter by attribute
+cat robots.html | pup 'th[scope="row"]'
+# <th scope="row" class="navbox-group">
+#  Exclusion standards
+# </th>
+# <th scope="row" class="navbox-group">
+#  Related marketing topics
+# </th>
+# <th scope="row" class="navbox-group">
+#  Search marketing related topics
+# </th>
+# <th scope="row" class="navbox-group">
+#  Search engine spam
+# </th>
+# <th scope="row" class="navbox-group">
+#  Linking
+# </th>
+# <th scope="row" class="navbox-group">
+#  People
+# </th>
+# <th scope="row" class="navbox-group">
+#  Other
+# </th>

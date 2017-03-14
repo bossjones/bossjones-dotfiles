@@ -1,2 +1,16 @@
-set completion-ignore-case on
+# https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
+# source: https://github.com/davejacobs/dotfiles/blob/a028a6e9b1f116035dd81ab6acdeee75751eb3f4/inputrc
 
+tab: complete
+
+set completion-ignore-case on
+set completion-prefix-display-length 2
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set blink-matching-paren on
+
+"\e[1;3C": forward-word
+"\e[1;3D": backward-word
+
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word

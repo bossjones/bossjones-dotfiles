@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# source: https://github.com/khoad/dotfiles/blob/c80db09659a590070c16d5942fcbfe8ccabd8e5c/setupNewRig.sh
+
+# iTerm setup
+# Have to change font in iTerm manually :(
+curl -O https://raw.githubusercontent.com/powerline/fonts/master/Meslo/Meslo%20LG%20M%20DZ%20Regular%20for%20Powerline.otf
+mv Meslo%20LG%20M%20DZ%20Regular%20for%20Powerline.otf /Library/Fonts
+# Have to load colors manually :(
+curl -O https://raw.githubusercontent.com/mbadolato/iTerm2-Color-Schemes/master/schemes/Solarized%20Dark%20Higher%20Contrast.itermcolors

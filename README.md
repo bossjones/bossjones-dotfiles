@@ -38,3 +38,11 @@ tmux_conf_theme_left_separator_main=''
 tmux_conf_theme_left_separator_sub=''
 tmux_conf_theme_right_separator_main=''
 tmux_conf_theme_right_separator_sub=''
+
+
+# Dotfiles to checkout
+- https://github.com/giftofjehovah/dotfiles/blob/8b61dfa30df615667eae7d236076a17729de5604/settings/macos.sh
+- https://github.com/rafeca/dotfiles/blob/816ffb81dc9ef37a16ce1037dbe121038ac86222/osx/apps/iterm2.sh
+- https://github.com/vbdjames/dotfiles/blob/853731feaad7c8486f74ee089f32a3674e0b349c/iterm/install.sh
+- https://github.com/khoad/dotfiles/blob/c80db09659a590070c16d5942fcbfe8ccabd8e5c/setupNewRig.sh
+- https://github.com/davejacobs/dotfiles/blob/a028a6e9b1f116035dd81ab6acdeee75751eb3f4/bin/setup-envs/osx
