@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Arturo Herrero" />
+  <meta name="description" content="Command line one-liners">
+
+  <title>Command line one-liners | Arturo Herrero</title>
+
+  <link href="http://fonts.googleapis.com/css?family=Vollkorn:400,400italic" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/assets/css/foundation.min.css" />
+  <link rel="stylesheet" href="/assets/css/normalize.css" />
+  <link rel="stylesheet" href="/assets/css/syntax.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/assets/css/main.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/assets/css/spinner.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.ico">
+
+  <link href="http://feeds.feedburner.com/arturoherrero" rel="alternate" type="application/rss+xml" title="Arturo Herrero">
+
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-1105623-5', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+
+</head>
+
+
+  <body>
+    <div class="row">
+      <div class="large-9 large-centered medium-10 medium-centered small-12 small-centered columns">
+        <header>
+  <h1><a href="/">Arturo Herrero</a></h1>
+</header>
+
+
+        <article>
+  <h2>Command line one-liners</h2>
+  <p>I attended the <a href="http://socratesuk.org/" target="_blank">SoCraTes UK</a> unconference. We had a space for lightning talks
+and I did a presentation about command line one-liners.</p>
+
+<p>I love Unix and I talked about terminal commands so I used <a href="https://github.com/fxn/tkn" target="_blank">Terminal
+Keynote</a>, a hack for terminal-based talks.</p>
+
+<p><sup>Contribute to the list with your own commands in the <a href="https://github.com/arturoherrero/command-line-one-liners" target="_blank">command line one-liners
+repository</a>.</sup></p>
+
+<p><img src="/assets/images/command-line-one-liners.png" alt="Terminal Keynote" /></p>
+
+<h2 id="command-line-one-liners">Command line one-liners</h2>
+
+<p>Run the last command</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>!!
+</code></pre>
+</div>
+
+<p>Run the last command as root</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo !!
+</code></pre>
+</div>
+
+<p>Create a script of the last executed command</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">"!!"</span> &gt; script.sh
+</code></pre>
+</div>
+
+<p>Reuse all parameter of the previous command line</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo cd</span> .
+<span class="gp">$ </span>!<span class="k">*</span>
+</code></pre>
+</div>
+
+<p>Run the last command with some argument</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo </span>a b c d e
+<span class="gp">$ </span><span class="nb">echo</span> !!:2
+<span class="gp">$ </span><span class="nb">echo</span> !!:3-<span class="err">$</span>
+</code></pre>
+</div>
+
+<p>Insert the last argument of the previous command</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cp script.sh /usr/bin/
+<span class="gp">$ </span><span class="nb">cd</span> &lt;ESC&gt; .
+</code></pre>
+</div>
+
+<p>Run previous command but replacing</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo </span>no typos
+<span class="gp">$ </span>^typos^errors
+</code></pre>
+</div>
+
+<p>Escape any command aliases</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">alias </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"ls -a"</span>
+<span class="gp">$ </span><span class="se">\l</span>s
+</code></pre>
+</div>
+
+<p>Quickly rename a file</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mv filename.<span class="o">{</span>old,new<span class="o">}</span>
+<span class="gp">$ </span>mv filename.<span class="o">{</span>png,jpg<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Create a quick back-up copy of a file</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cp file.txt<span class="o">{</span>,.bak<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>Run a command from the history</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">history</span>
+ ...
+ 1225  ls -l
+ 1226  git status
+ 1227  <span class="nb">history</span>
+<span class="gp">$ </span>!-3
+<span class="gp">$ </span>!1225
+</code></pre>
+</div>
+
+<p>Search the history for the most recent command beginning with ‘text’</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>!text
+</code></pre>
+</div>
+
+<p>List of commands you use most often</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">history</span> | awk <span class="s1">'{print $2}'</span> | sort | uniq -c | sort -rn | head
+</code></pre>
+</div>
+
+<p>Execute a command without saving it in the history</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>&lt;space&gt;command
+</code></pre>
+</div>
+
+<p>Make directory including intermediate directories</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir -p a/long/directory/path
+</code></pre>
+</div>
+
+<p>Create a directory and change into it</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir dir <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="nv">$_</span>
+</code></pre>
+</div>
+
+<p>Change to the previous working directory</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> -
+</code></pre>
+</div>
+
+<p>Jump to a directory. Execute a command. Jump back to current directory</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="o">(</span><span class="nb">cd</span> /tmp <span class="o">&amp;&amp;</span> ls<span class="o">)</span>
+</code></pre>
+</div>
+
+<p>Create simple text file from command line</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cat &gt; file.txt
+<span class="o">{</span>your text here<span class="o">}</span>
+<span class="o">{</span>your text here<span class="o">}</span>
+&lt;ctrl-d&gt;
+</code></pre>
+</div>
+
+<p>Empty a file</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>&gt; file.txt
+</code></pre>
+</div>
+
+<p>Show PATH in a human-readable way</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo</span> <span class="nv">$PATH</span> | tr <span class="s1">':'</span> <span class="s1">'\n'</span>
+<span class="gp">$ </span>tr <span class="s1">':'</span> <span class="s1">'\n'</span> <span class="o">&lt;&lt;&lt;</span> <span class="nv">$PATH</span>
+</code></pre>
+</div>
+
+<p>Make ‘less’ behave like ‘tail -f’</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>less +F somelogfile
+</code></pre>
+</div>
+
+<p>Redirect standard input to a file. Print it to standard output</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">command</span> | tee file.txt | less
+
+┌─────────┐  ┌─────────┐  ┌─────────┐
+│ <span class="nb">command</span> │─▸│   tee   │─▸│ stdout  │
+└─────────┘  └────┬────┘  └─────────┘
+                  │
+                  ▾
+            ┌───────────┐
+            │   file    │
+            └───────────┘
+</code></pre>
+</div>
+
+<p>Search for a <pattern> string inside all files in the current directory</pattern></p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>grep -RnsI --color<span class="o">=</span>auto &lt;pattern&gt; <span class="k">*</span>
+
+Beyond grep
+
+_   /|
+<span class="se">\'</span>o.O<span class="s1">'
+=(___)=
+  U    ack!
+
+$ ack &lt;pattern&gt;
+</span></code></pre>
+</div>
+
+<p>Recursively remove all empty directories</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>find . -type d -empty -delete
+</code></pre>
+</div>
+
+<p>Count your commits</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>git shortlog -sn
+</code></pre>
+</div>
+
+<p>Serve current directory tree at http://$HOSTNAME:8000/</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>python -m SimpleHTTPServer
+</code></pre>
+</div>
+
+<p>Share a file between two computers</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>nc -l 5566 &gt; data-dump.sql
+<span class="gp">$ </span>nc &lt;his-ip-address&gt; 5566 &lt; data-dump.sql
+</code></pre>
+</div>
+
+<p>Download an entire website</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>wget -m http://website.com
+</code></pre>
+</div>
+
+<p>Clear the terminal screen</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>&lt;ctrl-l&gt;
+</code></pre>
+</div>
+
+<p>Salvage a borked terminal</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>reset
+</code></pre>
+</div>
+
+<p>Close shell keeping all subprocess running</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">disown</span> -a <span class="o">&amp;&amp;</span> <span class="nb">exit</span>
+</code></pre>
+</div>
+
+<p>Run a command immune to hangups</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>nohup <span class="nb">command</span> &amp;
+</code></pre>
+</div>
+
+<p>Attach screen over ssh</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ssh user@host -t screen -r
+</code></pre>
+</div>
+
+<p>Compare a remote file with a local file</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ssh user@host cat /path/to/remotefile | diff /path/to/localfile -
+</code></pre>
+</div>
+
+<p>Get your public IP address</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl ifconfig.me
+</code></pre>
+</div>
+
+<p>Set audible alarm when an IP address comes online</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ping -a IP_address
+</code></pre>
+</div>
+
+<p>List programs with open ports and connections</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>lsof -i
+</code></pre>
+</div>
+
+<p>Currently mounted filesystems in nice layout</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mount | column -t
+</code></pre>
+</div>
+
+<p>Display free disk space</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>df -h
+</code></pre>
+</div>
+
+<p>Display disk usage statistics for the current directory</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>du -sh <span class="k">*</span>
+</code></pre>
+</div>
+
+<p>Display 10 biggest files/folders for the current directory</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>du -s <span class="k">*</span> | sort -nr | head
+</code></pre>
+</div>
+
+<p>Execute a command at a given time</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo</span> <span class="s2">"ls -l"</span> | at midnight
+</code></pre>
+</div>
+
+<p>Simple stopwatch</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">time read</span>
+&lt;ctrl-d&gt;
+</code></pre>
+</div>
+
+<p>Put a console clock in top right corner</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="k">while </span>sleep 1;do tput sc;tput cup 0 <span class="k">$(($(</span>tput cols<span class="k">)</span><span class="o">-</span><span class="m">29</span><span class="k">))</span>;date;tput rc;done &amp;
+</code></pre>
+</div>
+
+<p>Display the top ten running processes. (Sorted by memory usage)</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ps aux | sort -nk +4 | tail
+</code></pre>
+</div>
+
+<p>Kill all Ruby processes</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ps aux | grep ruby | awk <span class="s1">'{ print $2 }'</span> | xargs <span class="nb">kill</span> -9
+<span class="gp">$ </span>ps aux | awk <span class="s1">'/ruby/ &amp;&amp; ! /awk/ { system("kill -9 "$2) }'</span>
+</code></pre>
+</div>
+
+<p>32 bits or 64 bits?</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>getconf LONG_BIT
+</code></pre>
+</div>
+
+<p>Displays a calendar</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cal 12 1984
+</code></pre>
+</div>
+
+<p>What day is today?</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cal | sed <span class="s2">"s/.*/ &amp; /;s/ </span><span class="k">$(</span>date +%d<span class="k">)</span><span class="s2"> / [] /"</span>
+<span class="gp">$ </span>cal | sed <span class="s2">"s/.*/ &amp; /;s/ </span><span class="k">$(</span>date +%d<span class="k">)</span><span class="s2"> / </span><span class="k">$(</span><span class="nb">printf</span> <span class="s1">'\e[0;31m[]\e[0m'</span><span class="k">)</span><span class="s2"> /"</span>
+</code></pre>
+</div>
+
+<p>Show File System Hierarchy</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>man hier
+</code></pre>
+</div>
+
+<p>Quick access to the ascii table</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>man ascii
+</code></pre>
+</div>
+
+<p>Russian Roulette in Bash</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="o">[</span> <span class="nv">$[</span> <span class="nv">$RANDOM</span> % 6 <span class="o">]</span> <span class="o">==</span> 0 <span class="o">]</span> <span class="o">&amp;&amp;</span> rm -rf / <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"You live"</span>
+</code></pre>
+</div>
+
+<p>Watch Star Wars via telnet</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>telnet towel.blinkenlights.nl
+</code></pre>
+</div>
+
+
+  <img id="swirly" src="/assets/images/swirly.gif">
+</article>
+
+      </div>
+    </div>
+
+    <footer>
+</footer>
+
+  </body>
+</html>
