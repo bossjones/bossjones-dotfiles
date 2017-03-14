@@ -1,0 +1,131 @@
+# source: https://github.com/blakebinford/ubuntuconfig/blob/master/.conkyrc
+######################
+# - Conky settings - #
+######################
+update_interval 1
+total_run_times 0
+net_avg_samples 1
+cpu_avg_samples 1
+if_up_strictness link
+
+imlib_cache_size 0
+double_buffer yes
+no_buffers yes
+background yes
+
+format_human_readable
+
+#####################
+# - Text settings - #
+#####################
+use_xft yes
+xftfont Liberation Sans:size=9
+override_utf8_locale yes
+text_buffer_size 4096
+#text_buffer_size 2048
+
+#############################
+# - Window specifications - #
+#############################
+own_window_class Conky
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_argb_visual yes
+own_window_argb_value 200
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+alignment top_right
+gap_x 12
+#gap_x 25
+gap_y 40
+minimum_size 182 1000
+maximum_width 182
+
+default_bar_size 60 8
+
+#########################
+# - Graphics settings - #
+#########################
+draw_shades yes
+stippled_borders 1
+
+default_color 1793d0
+color0 white
+color1 1793d0
+color2 white
+color3 1793d0
+
+TEXT
+
+#Top Title Section
+${font openlogos:size=20}${font Arial:size=20}Ubuntu${color Ivory}LINUX${font openlogos:size=20}
+${font Liberation Sans:style=Bold:size=14}SYSTEM $hr${font}
+##############
+# - SYSTEM - #
+##############
+${voffset -50}
+${color DimGray}
+${font}
+
+$font${color White}$sysname $kernel $alignr $machine
+CPU  $alignr${freq_g cpu0}Ghz
+Uptime $alignr${uptime}
+File System $alignr${fs_type}
+
+# |--CPU
+#CPU Section
+${font Liberation Sans:style=Bold:size=14}PROCESSORS $hr${font}
+${font Liberation Sans:style=Bold:size=8}${color}CPU1:  ${font}${color2}${cpu cpu1}% ${alignr}${voffset -2}${cpugraph cpu1 8,60 1793d0 ffffff}${color}
+${font Liberation Sans:style=Bold:size=8}${color}CPU2:  ${font}${color2}${cpu cpu2}% ${alignr}${voffset -2}${cpugraph cpu2 8,60 1793d0 ffffff}${color}
+${font Liberation Sans:style=Bold:size=8}${color}CPU3:  ${font}${color2}${cpu cpu3}% ${alignr}${voffset -2}${cpugraph cpu3 8,60 1793d0 ffffff}${color}
+${font Liberation Sans:style=Bold:size=8}${color}CPU4:  ${font}${color2}${cpu cpu4}% ${alignr}${voffset -2}${cpugraph cpu4 8,60 1793d0 ffffff}${color}
+${voffset 5}
+# |--MEM
+${font Liberation Sans:style=Bold:size=14}${color White}MEMORY $hr${font}
+$font${color}MEM $alignc $mem / $memmax $alignr $memperc%
+${color White}${membar 10, 180}
+###############
+# - NETWORK - #
+###############
+${font Liberation Sans:bold:size=14}${voffset 10}NETWORK $hr${font}
+${voffset 6}${font Liberation Sans:bold:size=8}Signal:  ${font}${color2}${font Liberation Sans:size=8}${wireless_link_qual_perc wlp3s0}%${color}$font$alignr${font Liberation Sans:bold:size=8}Speed:  ${font}${color2}${font Liberation Sans:size=8}${wireless_bitrate wlp3s0}${color}$font
+${color0}${downspeedgraph wlp3s0 1793d0 ffffff}${color}
+${font Liberation Sans:style=Bold:size=8}Download: ${font}${font Liberation Sansd:size=8}${color2}${downspeed wlp3s0}${font}${color} ${font Liberation Sans:style=Bold:size=8}$alignr Total: ${font}${color2}${font Liberation Sans:size=8}${totaldown wlp3s0}${font}${color}
+${color0}${upspeedgraph wlp3s0 1793d0 ffffff}
+${color1}${font Liberation Sans:style=Bold:size=8}Upload: ${color}${font}${font Liberation Sans:size=8}${color2}${upspeed wlp3s0}${color} $alignr ${font Liberation Sans:style=Bold:size=8}Total: ${font}${color2}${font Liberation Sans:size=8}${totalup wlp3s0}${color}
+#############
+# - CLOCK - #
+#############
+${voffset 10}${font Liberation Sans:style=Bold:size=14}${color White}DATE $hr${font}
+${voffset 10}${alignc}${color}${font Liberation Sans:style=Bold:size=30}${time %I:%M}${font} ${time %p}${color White}
+${alignc 12}${time %d %B %Y}
+#################
+# - PROCESSES - #
+#################
+${font Liberation Sans:bold:size=14}${voffset 10}PROCESSES $hr${font}
+${voffset 5}${font Liberation Sans:bold:size=8}${color}Process Name${alignr}PID  CPU  MEM${font}
+${color2}${font Liberation Sans:size=8}${voffset -2} ${top name 1}${alignr}${top pid 1} ${top cpu 1} ${top mem 1}
+ ${top name 2}${alignr}${top pid 2} ${top cpu 2} ${top mem 2}
+ ${top name 3}${alignr}${top pid 3} ${top cpu 3} ${top mem 3}
+ ${top name 4}${alignr}${top pid 4} ${top cpu 4} ${top mem 4}
+ ${top name 5}${alignr}${top pid 5} ${top cpu 5} ${top mem 5}
+ ${top name 6}${alignr}${top pid 6} ${top cpu 6} ${top mem 6}${font}${color}
+${voffset 0}${font Liberation Sans:Bold:size=9}Total: ${font}${color2}$processes${color}${alignr}${voffset 2}${font Liberation Sans:Bold:size=9}Running: ${font}${color2}$running_processes$color
+#############
+# - POWER - #
+#############
+${font Liberation Sans:bold:size=14}${voffset 10}${color White}POWER $hr${font}
+${voffset 6}${font Liberation Sans:style=Bold:size=8}${color}Battery:  ${font}${font Liberation Sans:size=8}${color2}${alignr}${battery}  ${battery_bar 6,20}${font}${color}
+${font Liberation Sans:style=Bold:size=8}Remaining:  ${font}${color2}${font Liberation Sans:size=8}${alignr 28}$battery_time$font$color
+################
+# - DISK I/O - #
+################
+${font Liberation Sans:bold:size=14}${voffset 10}${color White}DISK I/O $hr${font}
+${voffset 6}${font Liberation Sans:style=Bold:size=8}${color}Root Disk:$alignr${font}${font Liberation Sans:size=8}${color2}/dev/sda2 (${fs_size /})${font}${color}${font Liberation Sans:style=Bold:size=8}${alignr}
+Usage: $font${color2}${font Liberation Sans:size=8}$alignr${fs_used /}, ${fs_free /} free$font$color
+${voffset 2}${font Liberation Sans:style=Bold:size=8}Total I/O:  ${font}${font Liberation Sans:size=8}${color2}${alignr}${diskio sda}${font}${color}
+${voffset 2}${font Liberation Sans:style=Bold:size=8}Read I/O:  ${font}${font Liberation Sans:size=8}${color2}$alignr${diskio_read sda}
+${diskiograph_read sda 8,180 1793d0 ffffff}${font}${color}
+${voffset 0}${font Liberation Sans:style=Bold:size=8}Write I/O:  ${font}${font Liberation Sans:size=8}${color2}$alignr${diskio_write sda}
+${diskiograph_write sda 8,180 1793d0 ffffff}${font}${color}
