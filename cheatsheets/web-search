@@ -1,0 +1,7 @@
+# Searching the web
+# source: https://hackernoon.com/cross-platform-productivity-tool-with-terminal-7dd0487ead93#.6oxf3gey7
+
+# This is the most used feature and oh-my-zsh has a perfect plugin, called web-search, that allows me to do this:
+# $ ddg how to ride a bicycle   # search duckduckgo
+# $ image beautiful bicycle     # search for images
+# $ map bicycle store           # search on a map
