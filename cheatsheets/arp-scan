@@ -1,0 +1,2 @@
+# first ping the Ping the broadcast address (you can find it with ifconfig | grep broadcast)
+arp -a
