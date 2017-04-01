@@ -13,7 +13,7 @@ root: ~/dev/bossjones/scarlett_os/
 pre: cd ~/dev/bossjones/scarlett-ansible; vagrant up; sleep 35;
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: rbenv shell2.2.3
+pre_window: rbenv shell 2.2.3
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -88,7 +88,6 @@ windows:
           - vagrant ssh
           - workon scarlett_os
           - echo -e "\e[93memitter"
-          - dbus-monitor
   - dbus_monitor:
       layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
       panes:
@@ -96,22 +95,36 @@ windows:
           - cd ~/dev/bossjones/scarlett-ansible
           - sleep 2
           - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93memitter"
           - dbus-monitor
   - tests:
       layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
       panes:
         - tests:
           - cd ~/dev/bossjones/scarlett-ansible
-          - sleep 2
+          - sleep 8
           - vagrant ssh
+          - workon scarlett_os
           - echo -e "\e[93mtests"
+        - test_log:
+          - cd ~/dev/bossjones/scarlett-ansible
+          - sleep 8
+          - vagrant ssh
+          - workon scarlett_os
+          - echo -e "\e[93mtests_log"
+        - travis:
+          - cd ~/dev/bossjones/scarlett_os
+          - sleep 8
+          - travis --help
   - journalctl:
       layout: 9fa4,223x75,0,0{118x75,0,0[118x52,0,0{59x52,0,0,8,58x52,60,0,13},118x22,0,53,12],104x75,119,0[104x16,119,0,1,104x15,119,17,9,104x22,119,33,2,104x19,119,56,3]}
       panes:
         - journalctl:
           - cd ~/dev/bossjones/scarlett-ansible
-          - sleep 2
+          - sleep 5
           - vagrant ssh
+          - workon scarlett_os
           - echo -e "\e[93mjournalctl"
           - journalctl -f
   - dfeet:
@@ -119,7 +132,8 @@ windows:
       panes:
         - dfeet:
           - cd ~/dev/bossjones/scarlett-ansible
-          - sleep 2
+          - sleep 10
           - vagrant ssh
+          - workon scarlett_os
           - echo -e "\e[93md-feet"
           - d-feet
