@@ -49,7 +49,7 @@
 		"subpixel_antialias",
 		"no_bold"
 	],
-	"font_size": 17,
+	"font_size": 14,
 	"bold_folder_labels": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
