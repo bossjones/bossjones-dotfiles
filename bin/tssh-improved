@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# tssh-improved
+
+# nean@hd-recording.at
+# version 0.20131106
+
+# source: http://hd-recording.at/dokuwiki/doku.php?id=linux:tmux#tssh
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# usage
+if [[ ! -n "$1" ]]
+then
+    echo "Usage: $0 <host1> <host2> ..."
+    exit 1
+fi
+
+# random session name
+session=$(shuf -n 1 /usr/share/dict/words | tr -cd "[:alpha:]")
+
+# get hosts
+host=("$@")
+
+# start session and 1st connection
+echo $session
+tmux -2 new-session -d -s $session "ssh ${host[0]}"
+
+
+for (( i=1 ; i < ${#host[@]} ; i++))
+do
+  tmux splitw -t $session "ssh ${host[$i]}"
+  tmux select-layout tiled
+done
+
+tmux set-window-option synchronize-panes on
+tmux attach -t $session
+

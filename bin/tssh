@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Title: Cluster SSH With Tmux
+
+# source: http://perlstalker.vuser.org/blog/2013/09/24/cluster-ssh-with-tmux/
+
+HOSTS=
+
+if [ $1 = 'cluster1' ]; then
+    HOSTS="host1 host2 host3"
+elif [ $1 = 'cluster2' ]; then
+    HOSTS="hostA hostB hostC hostD hostE hostF"
+else
+    exit
+fi
+
+for host in $HOSTS
+do
+    tmux splitw "ssh $host"
+    tmux select-layout tiled
+done
+tmux set-window-option synchronize-panes on

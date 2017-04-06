@@ -1,0 +1,4 @@
+brew install fpp
+brew install tmux-cssh
+brew install csshx
+brew install aspell

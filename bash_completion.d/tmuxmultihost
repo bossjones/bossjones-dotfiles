@@ -1,0 +1,84 @@
+# -*- mode: shell-script; sh-basic-offset: 8; indent-tabs-mode: t -*-
+# ex: ts=8 sw=8 noet filetype=sh
+#
+# tmuxmultihost(1) completion by Akom,
+# adapted from Aaron Spettl <aaron@spettl.de>, adapted from the
+# Debian GNU/Linux dput(1) completion by Roland Mas <lolando@debian.org>
+# Modified by James Mackie <jc.mackie@gmail.com> to enable node name matching.
+# source: https://gist.github.com/akomakom/2dab995b6a48899eee841cc0e4a3192e
+# source: http://tech.akom.net/archives/85-Bash-completion-for-tmux-multi-window-like-csshmssh.html
+
+have tmux &&
+_tmuxmultihost()
+{
+        local cur prev options paroptions clusters clusters_containing_cword
+
+        COMPREPLY=()
+        cur=${COMP_WORDS[COMP_CWORD]}
+        prev=${COMP_WORDS[COMP_CWORD-1]}
+
+        # all options understood by mssh
+        options='-a --alias -h --help -V --version'
+
+        # get the names of all defined clusters
+        clusters=$(
+        {
+                sed -e 's/^.*:\(.*\)$/\1/i' ~/.mssh_clusters 2> /dev/null || /bin/true
+        } | xargs | sort -u)
+
+        # use options and clusters for tab completion, except there isn't yet
+        # at least one character to filter by
+        # reason: don't show options if the user types "mssh <tab><tab>"
+        paroptions="$clusters"
+        [ -n "$cur" ] && paroptions="$paroptions $options"
+
+        #case $prev in
+        #'tmuxmultihost')
+        COMPREPLY=( "${COMPREPLY[@]}" $( compgen -W "$paroptions" | grep -- "^$cur") )
+
+        #       ;;
+        #esac
+
+        return 0
+}
+[ "$have" ] && complete -F _tmuxmultihost tmuxmultihost
+
+
+[ "$have" ] &&
+tmuxmultihost() {
+    local HOSTS HOST SSHARGS
+    if [ -z "$*" ]; then
+        echo "Please provide a list of hosts separated by spaces [TAB to list]..."
+	echo "You may pass ssh options as well, ie:  -l user cluster1 cluster2 ..."
+	echo "Regex allowed: cluster.*"
+        return 1
+    fi
+    for host in $* ; do
+	HOST="$(grep -- "${host}" ~/.mssh_clusters | grep -v "^#")"
+	if [ -z "$HOST" ] ; then
+		SSHARGS="$SSHARGS $cluster" # this is not a cluster, pass it as an option to ssh instead
+	else
+		HOSTS="$HOSTS $host"
+	fi
+    done
+
+    local hosts=( ${HOSTS} )
+
+    echo "Connecting to ${hosts[0]}"
+    tmux new-window -n 'splitnew' "ssh $SSHARGS ${hosts[0]}"
+    unset hosts[0];
+    for i in "${hosts[@]}"; do
+    echo "Splitting to $i"
+        tmux split-window -h -t 'splitnew' "ssh $SSHARGS $i"
+        tmux select-layout -t 'splitnew' tiled > /dev/null
+    done
+    tmux select-pane -t 'splitnew'
+    tmux set-window-option -t 'splitnew' synchronize-panes on > /dev/null
+    tmux rename-window -t 'splitnew' "$1"
+}
+
+# Alias
+
+[ "$have" ] && complete -F _tmuxmultihost tmh
+[ "$have" ] && tmh() { tmuxmultihost $*; }
+
