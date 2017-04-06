@@ -47,3 +47,52 @@ done
 tmux set-window-option synchronize-panes on
 tmux attach -t $session
 
+
+# tmux
+# enable/disable Broadcast:
+
+# ctrl-b :set-window-option synchronize-panes on
+# ctrl-b :setw synchronize-panes
+# shortcut : ctrl-b b
+
+# enable/disable mouse options:
+
+# ctrl-b m
+# ctrl-b M
+# tmux config
+# a simple tmux config
+
+# cat <<'EOF' > ~/.tmux.conf
+# set-window-option -g utf8 on
+# set -g default-terminal screen-256color
+# set-option -g set-clipboard on
+
+# # Sane scrolling
+# set -g mode-mouse on
+# set -g mouse-resize-pane on
+# set -g mouse-select-pane on
+# set -g mouse-select-window on
+
+# #set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+
+# # toggle mouse mode to allow mouse copy/paste
+# # set mouse on with prefix m
+# bind m \
+#     set -g mode-mouse on \;\
+#     set -g mouse-resize-pane on \;\
+#     set -g mouse-select-pane on \;\
+#     set -g mouse-select-window on \;\
+#     display 'Mouse: ON'
+# # set mouse off with prefix M
+# bind M \
+#     set -g mode-mouse off \;\
+#     set -g mouse-resize-pane off \;\
+#     set -g mouse-select-pane off \;\
+#     set -g mouse-select-window off \;\
+#     display 'Mouse: OFF'
+# # toggle Broadcast
+# bind b set-window-option synchronize-panes
+
+# # cange copy paste keybindings
+
+# EOF
