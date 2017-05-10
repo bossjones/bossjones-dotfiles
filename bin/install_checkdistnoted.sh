@@ -1,5 +1,6 @@
 #!/bin/sh
 #
+# source: https://apple.stackexchange.com/questions/111197/runaway-distnoted-process
 # install $HOME/bin/checkdistnoted
 # setup crontab to run every minute
 # 
